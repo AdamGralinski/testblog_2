@@ -32,6 +32,9 @@
             = comment.votedown_count
             - if comment.abusive
               = link_to "NOT ABUSIVE", not_abusive_post_comment_path(comment), method: :post,  :confirm => "Jesteś pewnien?"
+          %p 
+            Voters: 
+            = comment.users_vote
             /= link_to "Delete Comment", [comment.post, comment], method: :delete  
 
   .comment_new  
