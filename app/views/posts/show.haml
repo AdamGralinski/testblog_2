@@ -2,11 +2,44 @@
   %h2
     = post.title
     %small
-      = post.created_at
+      = post.created_at.strftime("%d/%m/%Y : %H:%M")
   = link_to "edit", edit_post_path(post), class: 'post__button--edit'
+  = post.user_id
 
+  
   .post__body
     = post.body
   .post__tags-list.tagsinput
     - post.tags_array.each do |tag|
       = content_tag :span, tag, class: 'tag'
+
+  .comment_display
+    %h3 Komentarze
+    - post.comments.each do |comment|
+      - if !comment.abusive or post.user_id == current_user.id
+        .comment_single
+          %p
+            %strong Napisany przez:
+            = comment.commenter
+          %p
+            %strong Treść:
+            = comment.body  
+          .votes
+            %strong Głosuj:
+            = link_to "PLUS", voteup_post_comment_path(comment), method: :post
+            =  comment.voteup_count 
+            = link_to "MINUS", votedown_post_comment_path(comment), method: :post
+            = comment.votedown_count
+            - if comment.abusive
+              = link_to "NOT ABUSIVE", not_abusive_post_comment_path(comment), method: :post,  :confirm => "Jesteś pewnien?"
+          
+
+          / = link_to "Delete Comment", [comment.post, comment], method: :delete  
+
+  .comment_new  
+    = simple_form_for [ post, post.comments.build ], html: { class: "form-comment", style: "margin-top:80px;"} do |f|
+      = f.input :commenter
+      = f.input :body
+      = f.button :submit
+  
+  

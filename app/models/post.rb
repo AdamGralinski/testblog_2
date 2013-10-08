@@ -10,6 +10,7 @@ class Post
   validates_presence_of :body, :title
 
   belongs_to :user
+  embeds_many :comments
 
   default_scope ne(archived: true)
 

@@ -1,0 +1,5 @@
+  .comment_new  
+    = simple_form_for [ post, post.comments.build ], html: { class: "form-comment", style: "margin-top:80px;"} do |f|
+      = f.input :commenter
+      = f.input :body
+      = f.button :submit
