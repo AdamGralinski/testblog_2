@@ -5,6 +5,7 @@ class Post
 
   field :body, type: String
   field :title, type: String
+  field :user_id, type: String
   field :archived, type: Boolean, default: false
 
   validates_presence_of :body, :title

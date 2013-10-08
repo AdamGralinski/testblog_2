@@ -2,8 +2,10 @@ class CommentsController < ApplicationController
   def create
     post = Post.find(params[:post_id])
     comment = post.comments.create(params[:comment])
+    comment.commenter = User.nickname
     comment.voteup_count = 0
     comment.votedown_count = 0
+    comment.users_vote = Array.new
     comment.user_id = current_user.id
     comment.save
     redirect_to post_path(post)

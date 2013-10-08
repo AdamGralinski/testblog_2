@@ -35,6 +35,7 @@ class PostsController < ApplicationController
   end
 
   def create
+    post.user_id = current_user.id
     if post.save
       redirect_to action: :index
     else
