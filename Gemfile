@@ -14,7 +14,6 @@ gem 'decent_exposure'
 gem 'decent_decoration'
 gem 'pry'
 gem 'flatui-rails', github: 'pkurek/flatui-rails'
-gem 'heroku'
 
 group :assets do
   gem 'sass-rails'
